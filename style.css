@@ -1,0 +1,15 @@
+body {
+	font-family: sans-serif;
+	font-size: 13px;
+}
+form {
+	margin: 1em 0;
+}
+.loader {
+	font-size: 0.8em;
+	border: 1px solid #666;
+}
+.loader .bar {
+	background-color: #66F;
+	margin-bottom: -1em;
+}

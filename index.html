@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>PitchPlay Demo</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<script src="//raw.github.com/forana/pitchplay-js/master/pitchplay.js"></script>
+		<script>
+			function enableAllButtons(form) {
+				var buttons = form.getElementsByTagName("button");
+				for (var i=0; i<buttons.length; i++) {
+					buttons[i].disabled = false;
+				}
+			}
+
+			document.addEventListener("DOMContentLoaded", function() {
+				PitchPlay.load("piano.json", "piano", function(e) {
+					document.getElementById("piano-loader").innerHTML = "Loaded!";
+					enableAllButtons(document.forms.piano);
+				}, function(e) {
+					document.getElementById("piano-loader").innerHTML = "Something went very wrong :(";
+				}, function(e) {
+					if (e.lengthComputable) {
+						document.getElementById("piano-loader").firstChild.style.width = Math.floor(e.loaded / e.total * 100) + "%";
+					}
+				});
+
+				PitchPlay.load("overdriven-guitar.json", "guitar", function(e) {
+					document.getElementById("guitar-loader").innerHTML = "Loaded!";
+					enableAllButtons(document.forms.guitar);
+				}, function(e) {
+					document.getElementById("guitar-loader").innerHTML = "Something went very wrong :(";
+				}, function(e) {
+					if (e.lengthComputable) {
+						document.getElementById("guitar-loader").firstChild.style.width = Math.floor(e.loaded / e.total * 100) + "%";
+					}
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<!-- low-tech html here - sorry, it's 5 am -->
+		<form name="piano">
+			<div id="piano-loader" class="loader"><div class="bar">&nbsp;</div>Loading...</div>
+			<span class="title">Piano</span><br/>
+			<button disabled="true" type="button" onclick="PitchPlay.play(PitchPlay.banks.piano, [60]);">Middle C</button>
+			<button disabled="true" type="button" onclick="PitchPlay.play(PitchPlay.banks.piano, [60, 61, 62, 64, 63], [60, 60, 60, 60]);">Too Spooky</button>
+			<button disabled="true" type
+		</form>
+		<form name="guitar" enabled="false">
+			<div id="guitar-loader" class="loader"><div class="bar">&nbsp;</div>Loading...</div>
+			<span class="title">Overdriven Guitar (#30)</span><br/>
+			<button disabled="true" type="button" onclick="PitchPlay.play(PitchPlay.banks.guitar, [60]);">Middle C</button>
+			<button disabled="true" type="button" onclick="PitchPlay.play(PitchPlay.banks.guitar, [48, 53, 60, 65]);">Power Chord, all at once</button>
+			<button disabled="true" type="button" onclick="PitchPlay.play(PitchPlay.banks.guitar, [48, 53, 60, 65], [50, 50, 50, 50]);">Power Chord, small delay</button>
+			<button disabled="true" type="button" onclick="PitchPlay.play(PitchPlay.banks.guitar, [48, 53, 60, 65], [500, 500, 500, 500]);">Power Chord, big delay</button>
+		</form>
+		2013 Alex Foran<br/>
+		<a href="https://github.com/forana/pitchplay-js">github</a>
+	</body>
+</html>
