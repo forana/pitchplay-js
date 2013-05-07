@@ -11,7 +11,7 @@ PitchPlay = {
 		req.addEventListener("load", function(e) {
 			self.banks[targetBank] = JSON.parse(req.responseText);
 			if (onSuccess) {
-				onSuccess();
+				onSuccess(e);
 			}
 		});
 
